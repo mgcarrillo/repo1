@@ -46,9 +46,14 @@ pipeline {
 			}
 		}
 		stage('Deploy to stage?') { agent none
+		  	when {
+				branch 'stage'
+				environment name: 'NODE_VER', value: '8.1.0'
+				// can also use anyof
+			}
 			steps {
 				input 'Deploy to stage?'
-				input message: 'Where do you want to go', parameters: [choice(choices: "Yes\nNo\nMaybe", description: '', name: 'Deploy')]
+				//input message: 'Where do you want to go', parameters: [choice(choices: "Yes\nNo\nMaybe", description: '', name: 'Deploy')]
 			}
 		}
 		stage('Parallel') {
