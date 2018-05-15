@@ -49,15 +49,15 @@ pipeline {
 				input message: 'Where do you want to go', parameters: [choice(choices: "Yes\nNo\nMaybe", description: '', name: 'Deploy')]
 			}
 		}
-		stage('Parallel') { agent any
+		stage('Parallel') {
 			failFast true  // fail immediately if all failed
 			parallel {
-				stage('Build1') {
+				stage('Build1') { agent any
 					steps {
 						echo "Its me"
 					}
 				}
-				stage('Build2') { 
+				stage('Build2') { agent any 
 					steps {
 						echo "Its not me"
 					}
