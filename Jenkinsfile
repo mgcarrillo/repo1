@@ -6,7 +6,7 @@ pipeline {
 	stages {
 		stage('Beginning') { agent any 
 			environment {
-				NEW_VAR = 'Howdy'
+				NEW_VAR = 'Stage'
 			}
 			steps {
 				echo 'Hello World'
@@ -15,6 +15,9 @@ pipeline {
 			}
 		}
 		stage('Who Am I?') { agent any
+			environment {
+				NEW_VAR = 'Production'
+			}
                 	steps {
 				echo "${env.ENV_VAR}"
 				sh 'host -t TXT pgp.michaelholley.us | awk -F \'"\' \'{print $2}\''
