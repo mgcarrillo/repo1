@@ -6,6 +6,7 @@ pipeline {
 
         // set global options - for example timeout for input responses	
 	// or skip checking out code every time
+	/*
 	options {
 		// skipDefaultCheckout()
 		// timeout(time: 1, unit: 'DAYS')
@@ -20,8 +21,9 @@ pipeline {
 		success {
 
 		}
-		/* failure, aborted, etc */
+		// failure, aborted, etc 
 	}
+	//
 
 	stages {
 		stage('Beginning') { agent any 
