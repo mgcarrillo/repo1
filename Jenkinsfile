@@ -3,6 +3,26 @@ pipeline {
 	environment {
 		NODE_VER = '8.1.0'
 	}
+
+        // set global options - for example timeout for input responses	
+	// or skip checking out code every time
+	options {
+		// skipDefaultCheckout()
+		// timeout(time: 1, unit: 'DAYS')
+	}
+
+	// tools to use - node, maven docker, etc
+	tools {
+	}
+
+	// post build steps
+	post {
+		success {
+
+		}
+		/* failure, aborted, etc */
+	}
+
 	stages {
 		stage('Beginning') { agent any 
 			environment {
@@ -26,6 +46,22 @@ pipeline {
 		stage('Deploy to stage?') { agent none
 			steps {
 				input 'Deploy to stage?'
+				input message: 'Where do you want to go', parameters: [choice(choices: "Yes\nNo\nMaybe", description: '', name: 'Deploy')]
+			}
+		}
+		stage('Parallel') { agent any
+			failFast true  // fail immediately if all failed
+			parallel {
+				stage('Build1') {
+					steps {
+						echo "Its me"
+					}
+				}
+				stage('Build2') { 
+					steps {
+						echo "Its not me"
+					}
+				}
 			}
 		}
 	}
